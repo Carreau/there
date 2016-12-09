@@ -5,7 +5,7 @@ Print current file and line number
    print(there)
 """
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 import sys
 import inspect

@@ -6,7 +6,7 @@ Print the current filename and line.
 
 Example, `where.py`
 
-```
+```python
 import there
 import there as here
 
