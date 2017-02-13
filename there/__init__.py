@@ -32,6 +32,22 @@ class There(types.ModuleType):
         cf = inspect.currentframe().f_back
         return '<there {}:{}>'.format(cf.f_code.co_filename, cf.f_lineno)
 
+    def print(*args, **kwargs):
+        cf = inspect.currentframe().f_back.f_back
+        print('{}:{}'.format(cf.f_code.co_filename, cf.f_lineno), *args, **kwargs)
+
+    @property
+    def LINE(self):
+        cf = inspect.currentframe().f_back
+        return cf.f_code.co_filename
+
+
+    @property
+    def FILE(self):
+        cf = inspect.currentframe().f_back
+        return cf.f_lineno
+
+
 
 There.__name__ = 'There'
 There = There('there', """
