@@ -5,11 +5,12 @@ Print current file and line number
    print(there)
 """
 
-__version__ = '0.0.2'
+__version__ = '0.0.5'
 
 import sys
 import inspect
 import types
+from builtins import print as _print
 
 class There(types.ModuleType):
     """
@@ -26,15 +27,15 @@ class There(types.ModuleType):
     def __str__(self):
         cf = inspect.currentframe().f_back
         return '{}:{}'.format(cf.f_code.co_filename, cf.f_lineno)
-        
+
     def __repr__(self):
         return str(self)
         cf = inspect.currentframe().f_back
         return '<there {}:{}>'.format(cf.f_code.co_filename, cf.f_lineno)
 
-    def print(*args, **kwargs):
-        cf = inspect.currentframe().f_back.f_back
-        print('{}:{}'.format(cf.f_code.co_filename, cf.f_lineno), *args, **kwargs)
+    def print(self, *args, **kwargs):
+        cf = inspect.currentframe().f_back
+        _print('{}:{}'.format(cf.f_code.co_filename, cf.f_lineno), '|',*args, **kwargs)
 
     @property
     def LINE(self):
@@ -53,7 +54,7 @@ There.__name__ = 'There'
 There = There('there', """
     Simply a global object that act as undefined.
     """
-)
+    )
 
 There.__version__ = __version__
 
@@ -61,4 +62,4 @@ if sys.modules[__name__] is There:
     print('doing nothing')
     pass
 else:
-   sys.modules[__name__] = There
+    sys.modules[__name__] = There
