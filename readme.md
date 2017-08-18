@@ -1,7 +1,5 @@
 # There
 
-![There logo](therelogo.png)
-
 Print the current filename and line. 
 
 Example, `where.py`
