@@ -14,6 +14,8 @@ from builtins import print as _print
 
 import os.path
 
+import syslog
+
 HOME = os.path.expanduser('~')
 LEN_HOME = len(HOME)
 
@@ -46,6 +48,10 @@ class There(types.ModuleType):
     def print(self, *args, **kwargs):
         cf = inspect.currentframe().f_back
         _print('{}:{}'.format(compress(cf.f_code.co_filename), cf.f_lineno), '|',*args, **kwargs)
+
+    def syslogprint(self, *args):
+        cf = inspect.currentframe().f_back
+        syslog.syslog(syslog.LOG_NOTICE, '{}:{}'.format(compress(cf.f_code.co_filename), cf.f_lineno) + '|' + ' '.join([str(x) for x in args]).replace('\n','\\n'))
 
     @property
     def LINE(self):
