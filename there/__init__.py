@@ -5,7 +5,7 @@ Print current file and line number
    print(there)
 """
 
-__version__ = '0.0.7'
+__version__ = '0.0.8'
 
 import sys
 import inspect
@@ -53,14 +53,12 @@ class There(types.ModuleType):
         cf = inspect.currentframe().f_back
         syslog.syslog(syslog.LOG_NOTICE, '{}:{}'.format(compress(cf.f_code.co_filename), cf.f_lineno) + '|' + ' '.join([str(x) for x in args]).replace('\n','\\n'))
 
-    @property
-    def LINE(self):
+    def FILE(self):
         cf = inspect.currentframe().f_back
         return compress(cf.f_code.co_filename)
 
 
-    @property
-    def FILE(self):
+    def LINE(self):
         cf = inspect.currentframe().f_back
         return cf.f_lineno
 
