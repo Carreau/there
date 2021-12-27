@@ -1,12 +1,14 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-module = "there"
-author = "Matthias Bussonnier"
-author-email = "bussonniermatthias@gmail.com"
-home-page = "https://github.com/Carreau/there"
+[project]
+name = "there"
+authors = [{name = "Matthias Bussonnier", email = "bussonniermatthias@gmail.com"}]
+readme = "readme.md"
+license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
-description-file = "readme.md"
+dynamic = ["version", "description"]
 
+[project.urls]
+Home = "https://github.com/Carreau/there"
