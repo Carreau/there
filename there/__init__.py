@@ -8,13 +8,15 @@ Print current file and line number
 __version__ = '0.0.9'
 
 import sys
+import platform
 import inspect
 import types
 from builtins import print as _print
 
 import os.path
 
-import syslog
+if platform.platform() != "Windows":
+    import syslog
 
 HOME = os.path.expanduser('~')
 LEN_HOME = len(HOME)
@@ -52,6 +54,9 @@ class There(types.ModuleType):
         _print('{}:{} in '.format(compress(cf.f_code.co_filename), cf.f_lineno, cf.f_code.co_name), '|',*args, **kwargs)
 
     def syslogprint(self, *args):
+        if platform.system() == "Windows":
+            return
+
         cf = inspect.currentframe().f_back
         syslog.syslog(syslog.LOG_NOTICE, '{}:{}'.format(compress(cf.f_code.co_filename), cf.f_lineno) + '|' + ' '.join([str(x) for x in args]).replace('\n','\\n'))
 
