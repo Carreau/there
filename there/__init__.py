@@ -15,7 +15,7 @@ from builtins import print as _print
 
 import os.path
 
-if platform.platform() != "Windows":
+if not platform.platform().startswith("Windows"):
     import syslog
 
 HOME = os.path.expanduser('~')
