@@ -5,7 +5,7 @@ Print current file and line number
    print(there)
 """
 
-__version__ = "0.0.11"
+__version__ = "0.0.12"
 
 import sys
 import platform
@@ -25,6 +25,10 @@ def compress(path):
     if path.startswith(HOME):
         return '~'+path[LEN_HOME:]
     return path
+
+
+print = lambda *args, **kwargs: None
+
 
 class There(types.ModuleType):
     """
